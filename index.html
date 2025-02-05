@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+    <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Green Power</title>
@@ -55,31 +55,33 @@
     <!-- 시금치 이미지 추가 -->
     <img src="https://raw.githubusercontent.com/siigumchi/greenpower-site/main/.github/images/spinach1.png" class="spinach">
 
-    <!-- Three.js 및 Model Viewer 라이브러리 로드 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@google/model-viewer@latest"></script>
+    <!-- Three.js 라이브러리 로드 -->
+    
+    
 
     <!-- 3D 모델을 표시할 컨테이너 -->
-    <model-viewer id="spinachModel"
-        src="https://raw.githubusercontent.com/siigumchi/greenpower-site/main/models/siigumchi_man.glb"
-        alt="시금치를 든 캐릭터"
-        auto-rotate
-        camera-controls
-        style="position: fixed; bottom: 20px; right: 20px; width: 150px; height: 150px;">
+    <model-viewer id="spinachModel" <model-viewer="" src="https://raw.githubusercontent.com/siigumchi/greenpower-site/main/models/siigumchi_man.glb" alt="시금치를 든 캐릭터" auto-rotate="" camera-controls="" style="position: fixed; bottom: 20px; right: 20px; width: 150px; height: 150px;" ar-status="not-presenting">
     </model-viewer>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const model = document.getElementById("spinachModel");
 
-            // 클릭하면 점점 커지는 애니메이션 (scale 속성 변경)
-            let scale = 1;
-            model.addEventListener("click", () => {
-                scale += 0.2; // 클릭할 때마다 20%씩 커짐
-                model.style.transform = `scale(${scale})`;
-            });
-        });
-    </script>
 
-</body>
-</html>
+    
+
+
+
+
+<script type="module">
+  import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.min.js';
+  import 'https://cdn.jsdelivr.net/npm/@google/model-viewer@latest';
+
+  document.addEventListener("DOMContentLoaded", function() {
+    const model = document.getElementById("spinachModel");
+
+    // 클릭하면 점점 커지는 애니메이션 (scale 속성 변경)
+    let scale = 1;
+    model.addEventListener("click", () => {
+        scale += 0.2; // 클릭할 때마다 20%씩 커짐
+        model.setAttribute("scale", `${scale} ${scale} ${scale}`);
+    });
+  });
+</script></body></html>
