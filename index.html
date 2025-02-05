@@ -45,12 +45,40 @@
             50% { transform: translateY(-20px) translateX(10px) rotate(10deg); }
             100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
         }
+
+        /*유튜브 버튼 스타일*/
+        .youtube-btn {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100px;
+        height: 100px;
+        cursor: pointer;
+        transition: transform 0.2s ease; /* 클릭 애니메이션 */}
+
+        /* 마우스를 올리면 이미지 변경 */
+        .youtube-btn:hover {
+            content: url('https://raw.githubusercontent.com/siigumchi/greenpower-site/main/.github/images/youtube2.png'); 
+        }
+        
+        /* 클릭할 때 꿀렁거리는 효과 */
+        .youtube-btn:active {
+            transform: translate(-50%, -50%) scale(0.9);
+        }
+
     </style>
 </head>
 <body>
     <h1>Welcome to Green Power 🍃</h1>
     <p>Boost your brainpower with spinach-powered insights!</p>
     <a href="https://your-ga-report-link.com" class="btn">View Analytics Report</a>
+
+    <a href="https://www.youtube.com/@siigumchi" target="_blank">
+    <img src="https://raw.githubusercontent.com/siigumchi/greenpower-site/main/.github/images/youtube1.png" 
+         class="youtube-btn" alt="유튜브 버튼">
+    </a>
+
 
     <!-- 시금치 이미지 추가 -->
     <img src="https://raw.githubusercontent.com/siigumchi/greenpower-site/main/.github/images/spinach1.png" class="spinach">
