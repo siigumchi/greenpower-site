@@ -56,7 +56,18 @@
     <img src="https://raw.githubusercontent.com/siigumchi/greenpower-site/main/.github/images/spinach1.png" class="spinach">
 
     <!-- 3D 모델을 표시할 컨테이너 -->
-    <model-viewer id="spinachModel" src="https://raw.githubusercontent.com/siigumchi/greenpower-site/main/models/siigumchi_man.glb" alt="시금치를 든 캐릭터" auto-rotate camera-controls style="position: fixed; bottom: 20px; right: 20px; width: 150px; height: 150px;"></model-viewer>
+    <model-viewer 
+    id="spinachModel"
+    src="https://raw.githubusercontent.com/siigumchi/greenpower-site/main/models/siigumchi_man.glb"
+    alt="시금치를 든 캐릭터"
+    auto-rotate
+    camera-controls
+    disable-zoom
+    min-camera-orbit="auto auto 10%"
+    max-camera-orbit="auto auto 100%"
+    style="position: fixed; bottom: 20px; right: 20px; width: 150px; height: 150px;">
+</model-viewer>
+
 
 <script>
 const scriptTags = Array.from(document.querySelectorAll('script'));
