@@ -38,7 +38,6 @@
             height: 100px;
             cursor: pointer;
         }
-
     </style>
 </head>
 <body>
@@ -52,11 +51,25 @@
         <div id="youtubeAnimation" class="youtube-btn"></div>
     </a>
 
+    <!-- 3D 모델 -->
+    <model-viewer 
+        id="spinachModel"
+        src="https://raw.githubusercontent.com/siigumchi/greenpower-site/main/models/siigumchi_man.glb"
+        alt="시금치를 든 캐릭터"
+        auto-rotate
+        auto-rotate-delay="0" 
+        rotation-per-second="30deg"
+        camera-controls
+        disable-zoom
+        min-camera-orbit="auto auto 10%"
+        max-camera-orbit="auto auto 100%"
+        style="position: fixed; top: 60%; left: 70%; transform: translate(-50%, -50%); width: 300px; height: 300px;">
+    </model-viewer>
+
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     const youtubeAnimation = document.getElementById("youtubeAnimation");
 
-    // 기본 애니메이션 (마우스를 올리기 전)
     let lottieInstance = lottie.loadAnimation({
         container: youtubeAnimation,
         renderer: "svg",
@@ -88,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 </script>
-
 </body>
 </html>
+
 
