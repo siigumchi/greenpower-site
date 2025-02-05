@@ -140,24 +140,33 @@ document.addEventListener("DOMContentLoaded", function() {
     fetch('https://raw.githubusercontent.com/siigumchi/greenpower-site/main/.github/images/youtube_images.json')
       .then(response => response.json())
       .then(data => {
-        const youtubeBtn = document.getElementById("youtubeBtn");
-        let isClicked = false; // 클릭 상태 저장
+        const youtubeBtn = document.getElementById("youtubeBtn"); // 기존 유튜브 버튼 선택
 
-        youtubeBtn.src = data.default; // 처음에는 1번 이미지
+        youtubeBtn.src = data.default; // 기본 이미지
 
-        // 클릭하면 2번 이미지로 변경
-        youtubeBtn.addEventListener("click", () => {
-          if (!isClicked) {
-            youtubeBtn.src = data.hover; // 클릭 시 2번 이미지
-            isClicked = true;
-          } else {
-            youtubeBtn.src = data.default; // 다시 클릭하면 원래 이미지로
-            isClicked = false;
-          }
+        // 마우스를 올리면 hover 이미지로 변경
+        youtubeBtn.addEventListener("mouseenter", () => {
+            youtubeBtn.src = data.hover;
         });
+
+        // 마우스를 치우면 다시 원래 이미지로 변경
+        youtubeBtn.addEventListener("mouseleave", () => {
+            youtubeBtn.src = data.default;
+        });
+
+        // 클릭 시 살짝 움찔하는 애니메이션 효과 추가
+        youtubeBtn.addEventListener("mousedown", () => {
+            youtubeBtn.style.transform = "scale(0.9)";
+        });
+
+        youtubeBtn.addEventListener("mouseup", () => {
+            youtubeBtn.style.transform = "scale(1)";
+        });
+
       })
       .catch(error => console.error("JSON 로드 오류:", error));
 });
+
 </script>
 </body>
 </html>
