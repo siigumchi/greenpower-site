@@ -28,6 +28,7 @@
             text-decoration: none;
             border-radius: 5px;
         }
+
         .youtube-btn {
             position: fixed;
             top: 50%;
@@ -37,8 +38,9 @@
             height: 100px;
             cursor: pointer;
         }
+
         .spinach {
-            position: absolute;
+            position: fixed;
             top: 10px;
             left: 10px;
             width: 100px;
@@ -47,6 +49,7 @@
     </style>
 </head>
 <body>
+
     <h1>Welcome to Green Power 🍃</h1>
     <p>Boost your brainpower with spinach-powered insights!</p>
     <a href="https://your-ga-report-link.com" class="btn">View Analytics Report</a>
@@ -63,7 +66,7 @@
     <model-viewer 
         id="spinachModel"
         src="https://raw.githubusercontent.com/siigumchi/greenpower-site/main/models/siigumchi_man.glb"
-        alt="시금치를 들 캐릭터"
+        alt="시금치를 든 캐릭터"
         auto-rotate
         auto-rotate-delay="0" 
         rotation-per-second="30deg"
@@ -75,42 +78,72 @@
     </model-viewer>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const youtubeAnimation = document.getElementById("youtubeAnimation");
+const scriptTags = Array.from(document.querySelectorAll('script'));
+const threeScript = scriptTags.find(script => script.src && script.src.includes('three.js'));
+const modelViewerScript = scriptTags.find(script => script.src && script.src.includes('model-viewer'));
+const inlineScript = scriptTags.find(script => !script.src);
 
-        let lottieInstance = lottie.loadAnimation({
+if (threeScript) {
+  threeScript.remove();
+}
+if (modelViewerScript) {
+  modelViewerScript.remove();
+}
+if (inlineScript) {
+  inlineScript.remove();
+}
+
+if (!window.__THREE__) {
+    window.__THREE__ = true; // Three.js가 이미 로드되지 않았을 때만 로드
+    const newModuleScript = document.createElement('script');
+    newModuleScript.type = 'module';
+    newModuleScript.textContent = `
+      import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.min.js';
+      import 'https://cdn.jsdelivr.net/npm/@google/model-viewer@latest';
+      document.addEventListener("DOMContentLoaded", function() {
+        const model = document.getElementById("spinachModel");
+        let scale = 1;
+        model.addEventListener("click", () => {
+            scale += 0.2;
+            model.setAttribute("scale", \`\${scale} \${scale} \${scale}\`);
+        });
+      });
+    `;
+    document.body.appendChild(newModuleScript);
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    const youtubeAnimation = document.getElementById("youtubeAnimation");
+    let lottieInstance = lottie.loadAnimation({
+        container: youtubeAnimation,
+        renderer: "svg",
+        loop: true,
+        autoplay: true,
+        path: "https://raw.githubusercontent.com/siigumchi/greenpower-site/main/.github/images/moving_youtube2.json"
+    });
+
+    youtubeAnimation.addEventListener("mouseenter", () => {
+        lottieInstance.destroy();
+        lottieInstance = lottie.loadAnimation({
+            container: youtubeAnimation,
+            renderer: "svg",
+            loop: true,
+            autoplay: true,
+            path: "https://raw.githubusercontent.com/siigumchi/greenpower-site/main/.github/images/moving_youtube1.json"
+        });
+    });
+
+    youtubeAnimation.addEventListener("mouseleave", () => {
+        lottieInstance.destroy();
+        lottieInstance = lottie.loadAnimation({
             container: youtubeAnimation,
             renderer: "svg",
             loop: true,
             autoplay: true,
             path: "https://raw.githubusercontent.com/siigumchi/greenpower-site/main/.github/images/moving_youtube2.json"
         });
-
-        youtubeAnimation.addEventListener("mouseenter", () => {
-            lottieInstance.destroy();
-            lottieInstance = lottie.loadAnimation({
-                container: youtubeAnimation,
-                renderer: "svg",
-                loop: true,
-                autoplay: true,
-                path: "https://raw.githubusercontent.com/siigumchi/greenpower-site/main/.github/images/moving_youtube1.json"
-            });
-        });
-
-        youtubeAnimation.addEventListener("mouseleave", () => {
-            lottieInstance.destroy();
-            lottieInstance = lottie.loadAnimation({
-                container: youtubeAnimation,
-                renderer: "svg",
-                loop: true,
-                autoplay: true,
-                path: "https://raw.githubusercontent.com/siigumchi/greenpower-site/main/.github/images/moving_youtube2.json"
-            });
-        });
     });
+});
 </script>
 </body>
 </html>
-
-
-
