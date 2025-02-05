@@ -55,7 +55,8 @@
     <!-- 시금치 이미지 추가 -->
     <img src="https://raw.githubusercontent.com/siigumchi/greenpower-site/main/.github/images/spinach1.png" class="spinach">
 
-    <!-- 3D 모델을 표시할 컨테이너 -->
+    <!-- 3D 모델을 표시할 컨테이너
+    style 은 시금치맨의 위치와 크기-->
     <model-viewer 
     id="spinachModel"
     src="https://raw.githubusercontent.com/siigumchi/greenpower-site/main/models/siigumchi_man.glb"
@@ -67,7 +68,6 @@
     disable-zoom
     min-camera-orbit="auto auto 10%"
     max-camera-orbit="auto auto 100%"
-    <!-- 시금치맨의 위치 크기 조정 -->
     style="position: fixed; top: 60%; left: 70%; transform: translate(-50%, -50%); width: 300px; height: 300px;">
 </model-viewer>
 
