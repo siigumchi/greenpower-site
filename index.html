@@ -29,30 +29,12 @@
             border-radius: 5px;
         }
 
-        /* 시금치 애니메이션 */
-        .spinach {
-            position: absolute;
-            left: 0;
-            width: 80px;
-            animation: float 5s infinite ease-in-out;
-        }
-        .spinach:nth-child(1) { top: 10%; animation-duration: 4s; }
-        .spinach:nth-child(2) { top: 30%; animation-duration: 6s; }
-        .spinach:nth-child(3) { top: 50%; animation-duration: 5s; }
-        .spinach:nth-child(4) { top: 70%; animation-duration: 7s; }
-
-        @keyframes float {
-            0% { transform: translateY(0px) translateX(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) translateX(10px) rotate(10deg); }
-            100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
-        }
-
         .youtube-btn {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 100px; /* Lottie 애니메이션 크기 조절 */
+            width: 100px;
             height: 100px;
             cursor: pointer;
         }
@@ -69,24 +51,6 @@
     <a href="https://www.youtube.com/@siigumchi" target="_blank">
         <div id="youtubeAnimation" class="youtube-btn"></div>
     </a>
-
-    <!-- 시금치 이미지 추가 -->
-    <img src="https://raw.githubusercontent.com/siigumchi/greenpower-site/main/.github/images/spinach1.png" class="spinach">
-
-    <!-- 3D 모델 -->
-    <model-viewer 
-        id="spinachModel"
-        src="https://raw.githubusercontent.com/siigumchi/greenpower-site/main/models/siigumchi_man.glb"
-        alt="시금치를 든 캐릭터"
-        auto-rotate
-        auto-rotate-delay="0" 
-        rotation-per-second="30deg"
-        camera-controls
-        disable-zoom
-        min-camera-orbit="auto auto 10%"
-        max-camera-orbit="auto auto 100%"
-        style="position: fixed; top: 60%; left: 70%; transform: translate(-50%, -50%); width: 300px; height: 300px;">
-    </model-viewer>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
@@ -123,6 +87,10 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 </script>
+
+</body>
+</html>
+
 
 </body>
 </html>
