@@ -46,30 +46,28 @@
             100% { transform: translateY(0px) translateX(0px) rotate(0deg); }
         }
 
-        /*유튜브 버튼 스타일*/
         .youtube-btn {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 100px;
-        height: 100px;
-        cursor: pointer;
-        transition: transform 0.2s ease; /* 클릭 애니메이션 */}
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px; /* 원하는 크기로 조절 */
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.1s ease-in-out;
+}
 
-        /* 마우스를 올리면 이미지 변경 */
-        .youtube-btn:hover {
-            content: url('https://raw.githubusercontent.com/siigumchi/greenpower-site/main/.github/images/youtube2.png'); 
-        }
-        
-        /* 클릭할 때 꿀렁거리는 효과 */
-        .youtube-btn:active {
-            transform: translate(-50%, -50%) scale(0.9);
-        }
+.youtube-btn:active {
+    transform: translate(-50%, -50%) scale(0.9);
+}
 
+    
     </style>
 </head>
 <body>
+
+    <img id="youtubeBtn" src="" alt="YouTube Button" class="youtube-btn">
+
     <h1>Welcome to Green Power 🍃</h1>
     <p>Boost your brainpower with spinach-powered insights!</p>
     <a href="https://your-ga-report-link.com" class="btn">View Analytics Report</a>
@@ -137,6 +135,30 @@ if (!window.__THREE__) {
     `;
     document.body.appendChild(newModuleScript);
 }
+
+    
+document.addEventListener("DOMContentLoaded", function() {
+    fetch('https://raw.githubusercontent.com/siigumchi/greenpower-site/main/.github/images/moving_youtube1.json')
+      .then(response => response.json())
+      .then(data => {
+        const youtubeBtn = document.getElementById("youtubeBtn");
+        let isClicked = false; // 클릭 상태 저장
+
+        youtubeBtn.src = data.default; // 처음에는 1번 이미지
+
+        // 클릭하면 2번 이미지로 변경
+        youtubeBtn.addEventListener("click", () => {
+          if (!isClicked) {
+            youtubeBtn.src = data.hover; // 클릭 시 2번 이미지
+            isClicked = true;
+          } else {
+            youtubeBtn.src = data.default; // 다시 클릭하면 원래 이미지로
+            isClicked = false;
+          }
+        });
+      })
+      .catch(error => console.error("JSON 로드 오류:", error));
+});
 </script>
 </body>
 </html>
