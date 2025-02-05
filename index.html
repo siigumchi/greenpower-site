@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Green Power</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.9.6/lottie.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -47,119 +48,81 @@
         }
 
         .youtube-btn {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80px; /* 원하는 크기로 조절 */
-    height: auto;
-    cursor: pointer;
-    transition: transform 0.1s ease-in-out;
-}
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px; /* Lottie 애니메이션 크기 조절 */
+            height: 100px;
+            cursor: pointer;
+        }
 
-.youtube-btn:active {
-    transform: translate(-50%, -50%) scale(0.9);
-}
-
-    
     </style>
 </head>
 <body>
-
 
     <h1>Welcome to Green Power 🍃</h1>
     <p>Boost your brainpower with spinach-powered insights!</p>
     <a href="https://your-ga-report-link.com" class="btn">View Analytics Report</a>
 
+    <!-- 유튜브 버튼 (Lottie 애니메이션) -->
     <a href="https://www.youtube.com/@siigumchi" target="_blank">
-        
-    <iframe id="youtubeAnimation" class="youtube-btn" frameborder="0"></iframe>
-
-
-
+        <div id="youtubeAnimation" class="youtube-btn"></div>
+    </a>
 
     <!-- 시금치 이미지 추가 -->
     <img src="https://raw.githubusercontent.com/siigumchi/greenpower-site/main/.github/images/spinach1.png" class="spinach">
 
-    <!-- 3D 모델을 표시할 컨테이너
-    style 은 시금치맨의 위치와 크기-->
+    <!-- 3D 모델 -->
     <model-viewer 
-    id="spinachModel"
-    src="https://raw.githubusercontent.com/siigumchi/greenpower-site/main/models/siigumchi_man.glb"
-    alt="시금치를 든 캐릭터"
-    auto-rotate
+        id="spinachModel"
+        src="https://raw.githubusercontent.com/siigumchi/greenpower-site/main/models/siigumchi_man.glb"
+        alt="시금치를 든 캐릭터"
+        auto-rotate
         auto-rotate-delay="0" 
         rotation-per-second="30deg"
-    camera-controls
-    disable-zoom
-    min-camera-orbit="auto auto 10%"
-    max-camera-orbit="auto auto 100%"
-    style="position: fixed; top: 60%; left: 70%; transform: translate(-50%, -50%); width: 300px; height: 300px;">
-</model-viewer>
-
+        camera-controls
+        disable-zoom
+        min-camera-orbit="auto auto 10%"
+        max-camera-orbit="auto auto 100%"
+        style="position: fixed; top: 60%; left: 70%; transform: translate(-50%, -50%); width: 300px; height: 300px;">
+    </model-viewer>
 
 <script>
-const scriptTags = Array.from(document.querySelectorAll('script'));
-const threeScript = scriptTags.find(script => script.src && script.src.includes('three.js'));
-const modelViewerScript = scriptTags.find(script => script.src && script.src.includes('model-viewer'));
-const inlineScript = scriptTags.find(script => !script.src);
-
-if (threeScript) {
-  threeScript.remove();
-}
-if (modelViewerScript) {
-  modelViewerScript.remove();
-}
-if (inlineScript) {
-  inlineScript.remove();
-}
-
-if (!window.__THREE__) {
-    window.__THREE__ = true; // Three.js가 이미 로드되지 않았을 때만 로드
-    const newModuleScript = document.createElement('script');
-    newModuleScript.type = 'module';
-    newModuleScript.textContent = `
-      import * as THREE from 'https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.module.min.js';
-      import 'https://cdn.jsdelivr.net/npm/@google/model-viewer@latest';
-
-      document.addEventListener("DOMContentLoaded", function() {
-        const model = document.getElementById("spinachModel");
-
-        // 클릭하면 점점 커지는 애니메이션 (scale 속성 변경)
-        let scale = 1;
-        model.addEventListener("click", () => {
-            scale += 0.2; // 클릭할 때마다 20%씩 커짐
-            model.setAttribute("scale", \`\${scale} \${scale} \${scale}\`);
-        });
-      });
-    `;
-    document.body.appendChild(newModuleScript);
-}
-
-    
 document.addEventListener("DOMContentLoaded", function() {
     const youtubeAnimation = document.getElementById("youtubeAnimation");
-    let currentJson = "moving_youtube1.json";
 
-    function updateAnimation(jsonFile) {
-        youtubeAnimation.src = `https://raw.githubusercontent.com/siigumchi/greenpower-site/main/.github/images/${jsonFile}`;
-    }
-
-    // 초기 애니메이션 설정
-    updateAnimation(currentJson);
-
-    // 마우스 올리면 2번 JSON 파일로 변경
-    youtubeAnimation.addEventListener("mouseenter", () => {
-        updateAnimation("moving_youtube2.json");
+    let lottieInstance = lottie.loadAnimation({
+        container: youtubeAnimation,
+        renderer: "svg",
+        loop: true,
+        autoplay: true,
+        path: "https://raw.githubusercontent.com/siigumchi/greenpower-site/main/.github/images/moving_youtube1.json"
     });
 
-    // 마우스 치우면 다시 1번 JSON 파일로 변경
+    youtubeAnimation.addEventListener("mouseenter", () => {
+        lottieInstance.destroy(); // 기존 애니메이션 삭제
+        lottieInstance = lottie.loadAnimation({
+            container: youtubeAnimation,
+            renderer: "svg",
+            loop: true,
+            autoplay: true,
+            path: "https://raw.githubusercontent.com/siigumchi/greenpower-site/main/.github/images/moving_youtube2.json"
+        });
+    });
+
     youtubeAnimation.addEventListener("mouseleave", () => {
-        updateAnimation("moving_youtube1.json");
+        lottieInstance.destroy(); // 기존 애니메이션 삭제
+        lottieInstance = lottie.loadAnimation({
+            container: youtubeAnimation,
+            renderer: "svg",
+            loop: true,
+            autoplay: true,
+            path: "https://raw.githubusercontent.com/siigumchi/greenpower-site/main/.github/images/moving_youtube1.json"
+        });
     });
 });
-
-
 </script>
+
 </body>
 </html>
